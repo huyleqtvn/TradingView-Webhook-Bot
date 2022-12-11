@@ -17,12 +17,12 @@ import config
 
 
 def send_alert(data):
-    msg = data["msg"].encode("latin-1", "backslashreplace").decode("unicode_escape")
+    msg = data["text"].encode("latin-1", "backslashreplace").decode("unicode_escape")
     if config.send_telegram_alerts:
         tg_bot = Bot(token=config.tg_token)
         try:
             tg_bot.sendMessage(
-                data["telegram"],
+                config.channel,
                 msg,
                 parse_mode="MARKDOWN",
             )
